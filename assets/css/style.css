@@ -1,0 +1,309 @@
+/* ==================================
+   Custom Styles for Student System
+   Author: Your Group Name
+   ================================== */
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* Card appearance */
+.card {
+    border-radius: 12px;
+}
+
+/* Page titles */
+.page-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Buttons */
+.btn-primary {
+    border-radius: 8px;
+    background-color: #871954;
+}
+
+/* Profile photo – used on teacher & student dashboards */
+.profile-photo {
+    width: 110px;        /* was 160 */
+    height: 110px;       /* was 160 */
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0d6efd;
+}
+
+.hero {
+    min-height: 70vh;
+    background-image: url("../images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ====================================================
+   Floating Chatbot Styles
+   ==================================================== */
+
+/* Round blue "Chat" button */
+.koro-chat-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1050;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+}
+
+/* Hover effect */
+.koro-chat-fab:hover {
+    background-color: #0b5ed7;
+}
+
+/* Popup chat window */
+.koro-chat-popup {
+    position: fixed;
+    right: 20px;
+    bottom: 70px;
+    width: 340px;
+    max-width: 100%;
+    max-height: 430px;
+    display: none; /* hidden by default */
+    z-index: 1050;
+}
+
+/* When open, show it */
+.koro-chat-popup.open {
+    display: block;
+}
+
+/* Popup header + body colours */
+.koro-chat-popup .card-header {
+    background-color: #0d6efd;
+    color: #ffffff;
+    padding: 0.35rem 0.6rem;
+}
+
+.koro-chat-popup .card-body {
+    background-color: #f8f9fa;
+}
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0d6efd;
+    background: #fff;
+}
+.developer-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0d6efd;
+    padding: 3px;
+    background: white;
+    transition: transform .3s;
+}
+
+.developer-photo:hover {
+    transform: scale(1.05);
+}
+
+.dev-line {
+    width: 60%;
+    border: 0;
+    height: 2px;
+    background-color: #0d6efd;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+      /* ====== Dark Mode Styles ====== */
+      body.dark-mode {
+          background-color: #1575be;
+          color: #e0e0e0;
+      }
+
+      body.dark-mode .navbar {
+          background-color: #1e1e1e !important;
+      }
+
+      body.dark-mode .card {
+          background-color: rgb(46, 46, 46);
+          border-color: #333;
+          color: #e0e0e0;
+      }
+
+      body.dark-mode .text-muted {
+          color: hsl(0, 0%, 99%) !important;
+      }
+
+      body.dark-mode .btn-success {
+          background-color: #2e7d32;
+          border-color: #2e7d32;
+          color: #fff !important;
+      }
+
+      body.dark-mode .btn-success:hover {
+          background-color: #43a047;
+          border-color: #43a047;
+      }
+
+      /* ====== Dark Mode Toggle Switch (compact) ====== */
+      .form-switch .form-check-input {
+          cursor: pointer;
+          width: 2.2em;
+          height: 1.1em;
+      }
+
+      .form-switch .form-check-label {
+          color: #fff;
+          margin-left: 6px;
+          font-size: 0.85rem;
+      }
+/* ===========================
+   DARK MODE ENHANCEMENTS
+   =========================== */
+
+/* Cards and panels */
+body.dark-mode .card,
+body.dark-mode .card-body,
+body.dark-mode .bg-light {
+  background-color: hwb(0 24% 75%) !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+/* Tables */
+body.dark-mode table {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode th {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode td {
+  background-color: #1e1e1e !important;
+  color: #dddddd !important;
+}
+
+/* Footer */
+body.dark-mode footer {
+  background-color: #1e1e1e !important;
+  color: #cccccc !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-primary {
+  background-color: #1565c0 !important;
+  border-color: #1565c0 !important;
+  color: #fff !important;
+}
+body.dark-mode .btn-primary:hover {
+  background-color: #1e88e5 !important;
+  border-color: #1e88e5 !important;
+}
+
+body.dark-mode .btn-outline-light {
+  color: #ddd !important;
+  border-color: #aaa !important;
+}
+body.dark-mode .btn-outline-light:hover {
+  background-color: #ddd !important;
+  color: #000 !important;
+}
+
+/* Alerts, badges, etc. */
+body.dark-mode .alert {
+  background-color: #222 !important;
+  color: #eee !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode .badge.bg-success {
+  background-color: #388e3c !important;
+}
+body.dark-mode .badge.bg-warning {
+  background-color: #f9a825 !important;
+  color: #000 !important;
+}
+body.dark-mode .badge.bg-danger {
+  background-color: #d32f2f !important;
+}
+
+/* Input fields */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #222 !important;
+  color: #eee !important;
+  border-color: #444 !important;
+}
+body.dark-mode input::placeholder {
+  color: #999 !important;
+}
+
+/* Chat widget or sticky elements */
+body.dark-mode .chat-widget,
+body.dark-mode .bg-white {
+  background-color: #1c1c1c !important;
+  color: #e0e0e0 !important;
+}
+
+/* Divider lines */
+body.dark-mode hr {
+  border-top: 1px solid #333 !important;
+}
+
+/* ===========================
+   FORM TEXT & LABEL FIXES (DARK MODE)
+   =========================== */
+
+/* Make all labels and muted text visible */
+body.dark-mode label,
+body.dark-mode .form-label,
+body.dark-mode .text-muted {
+  color: #dcdcdc !important;
+}
+
+/* Improve placeholder readability */
+body.dark-mode ::placeholder {
+  color: #aaaaaa !important;
+  opacity: 1; /* ensures full visibility */
+}
+
+/* Input fields */
+body.dark-mode input.form-control,
+body.dark-mode textarea.form-control,
+body.dark-mode select.form-select {
+  background-color: #2a2a2a !important;
+  color: #f0f0f0 !important;
+  border-color: #444 !important;
+}
+
+/* Focused field highlight (better contrast in dark mode) */
+body.dark-mode input.form-control:focus,
+body.dark-mode textarea.form-control:focus,
+body.dark-mode select.form-select:focus {
+  background-color: #333 !important;
+  border-color: #0d6efd !important; /* same as Bootstrap primary blue */
+  color: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(13,110,253,0.25);
+}
+
+/* Help text under inputs */
+body.dark-mode .form-text {
+  color: #bbbbbb !important;
+}
