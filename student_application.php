@@ -71,11 +71,41 @@ if ($step === 1 && $_SERVER["REQUEST_METHOD"] === "POST") {
     $address       = trim($_POST["address"] ?? "");
 
     // Simple validation
-    if ($firstName === "")      $errors[] = "Please enter your first name.";
-    if ($lastName === "")       $errors[] = "Please enter your last name.";
-    if ($dob === "")            $errors[] = "Please enter your date of birth.";
-    if ($parentName === "")     $errors[] = "Please enter your parent's/guardian's name.";
-    if ($parentContact === "")  $errors[] = "Please enter your parent's/guardian's contact.";
+
+
+
+if (trim($firstName) === "") {
+    $errors[] = "Please enter your first name.";
+}
+if (trim($lastName) === "") {
+    $errors[] = "Please enter your last name.";
+}
+
+if (trim($dob) === "") {
+    $errors[] = "Please enter your date of birth.";
+} elseif (!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/', $dob)) {
+    $errors[] = "Please enter a valid date of birth in the format YYYY-MM-DD.";
+} else {
+    [$y, $m, $d] = explode('-', $dob);
+    if (!checkdate((int)$m, (int)$d, (int)$y)) {
+        $errors[] = "The date of birth is not a valid calendar date.";
+    }
+}
+
+if (trim($parentName) === "") {
+    $errors[] = "Please enter your parent's/guardian's name.";
+}
+if (trim($parentContact) === "") {
+    $errors[] = "Please enter your parent's/guardian's contact.";
+} elseif (!preg_match('/^\+?[0-9\s\-\.\(\)]+$/', $parentContact) || 
+          (strlen(preg_replace('/\D+/', '', $parentContact)) < 7) ||
+          (strlen(preg_replace('/\D+/', '', $parentContact)) > 15)) {
+    $errors[] = "Please enter a valid parent's/guardian's contact number, has to be 7 or more digits .";
+}
+
+
+
+
     // Address optional if you like; you can also require it.
 
     // Handle photo upload (optional but recommended)
