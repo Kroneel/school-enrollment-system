@@ -26,38 +26,37 @@ $student = null;
 if ($query !== "") {
 
     // SQL joins student_accounts with latest application info in student_enrollments
-    $sql = "SELECT 
-                sa.student_id,
-                sa.full_name,
-                sa.email,
-                sa.photo_filename AS account_photo,
-
-                se.application_id,
-                se.first_name,
-                se.last_name,
-                se.year_level,
-                se.stream,
-                se.subjects,
-                se.status,
-                se.submitted_at,
-                se.rejection_reason,
-                se.offer_letter,
-                se.student_photo AS app_photo
-            FROM student_accounts sa
-            LEFT JOIN student_enrollments se 
-                ON sa.student_id = se.student_id
-            WHERE sa.student_id = ?
-               OR sa.full_name LIKE ?
-            LIMIT 1";
+$sql = "SELECT 
+            sa.student_id,
+            sa.full_name,
+            sa.email,
+            sa.photo_filename AS account_photo,
+            se.application_id,
+            se.first_name,
+            se.last_name,
+            se.year_level,
+            se.stream,
+            se.subjects,
+            se.status,
+            se.submitted_at,
+            se.rejection_reason,
+            se.offer_letter,
+            se.student_photo AS app_photo
+        FROM student_accounts sa
+        LEFT JOIN student_enrollments se 
+            ON sa.student_id = se.student_id
+        WHERE sa.student_id LIKE ?
+           OR sa.full_name LIKE ?
+        ORDER BY se.submitted_at DESC
+        LIMIT 1";
 
     // Prepare SQL query
-    $stmt = $conn->prepare($sql);
+$stmt = $conn->prepare($sql);
 
     // Use LIKE for partial name searching
-    $like = "%$query%";
-
+$like = "%$query%";
     // Bind parameters to prevent SQL injection
-    $stmt->bind_param("ss", $query, $like);
+$stmt->bind_param("ss", $like, $like);
 
     // Execute the SQL query
     $stmt->execute();

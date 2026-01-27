@@ -27,11 +27,11 @@ $todayDate = date("l, d M Y");
 $applicationId      = null;
 $submittedAt        = null;
 $applicationStatus  = null;
-$rejectionReason    = null;
+$teacher_comment    = null;
 $offerLetter        = null; // holds offer letter filename from DB
 
 // Note: we now also select offer_letter (column must exist in student_enrollments)
-$sql = "SELECT application_id, status, submitted_at, rejection_reason, offer_letter
+$sql = "SELECT application_id, status, submitted_at, teacher_comment, offer_letter
         FROM student_enrollments
         WHERE student_id = ?
         ORDER BY submitted_at DESC
@@ -46,7 +46,7 @@ if ($row = $result->fetch_assoc()) {
     $applicationId     = $row["application_id"];
     $submittedAt       = $row["submitted_at"];
     $applicationStatus = $row["status"];
-    $rejectionReason   = $row["rejection_reason"];
+    $teacher_comment   = $row["teacher_comment"];
     $offerLetter       = $row["offer_letter"]; // filename of uploaded offer letter
 }
 
@@ -265,12 +265,12 @@ include "partials/header.php";
             <?php if ($applicationStatus === "rejected"): ?>
               <div class="alert alert-danger mt-3">
                 <strong>Reason for rejection:</strong><br>
-                <?= htmlspecialchars($rejectionReason) ?>
+                <?= htmlspecialchars($teacher_comment) ?>
               </div>
 
-              <a href="student_application.php" class="btn btn-warning btn-sm mt-2">
+              <!-- <a href="student_application.php" class="btn btn-warning btn-sm mt-2">
                 Reapply
-              </a>
+              </a> -->
             <?php endif; ?>
 
           <?php else: ?>

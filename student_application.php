@@ -71,41 +71,11 @@ if ($step === 1 && $_SERVER["REQUEST_METHOD"] === "POST") {
     $address       = trim($_POST["address"] ?? "");
 
     // Simple validation
-
-
-
-if (trim($firstName) === "") {
-    $errors[] = "Please enter your first name.";
-}
-if (trim($lastName) === "") {
-    $errors[] = "Please enter your last name.";
-}
-
-if (trim($dob) === "") {
-    $errors[] = "Please enter your date of birth.";
-} elseif (!preg_match('/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/', $dob)) {
-    $errors[] = "Please enter a valid date of birth in the format YYYY-MM-DD.";
-} else {
-    [$y, $m, $d] = explode('-', $dob);
-    if (!checkdate((int)$m, (int)$d, (int)$y)) {
-        $errors[] = "The date of birth is not a valid calendar date.";
-    }
-}
-
-if (trim($parentName) === "") {
-    $errors[] = "Please enter your parent's/guardian's name.";
-}
-if (trim($parentContact) === "") {
-    $errors[] = "Please enter your parent's/guardian's contact.";
-} elseif (!preg_match('/^\+?[0-9\s\-\.\(\)]+$/', $parentContact) || 
-          (strlen(preg_replace('/\D+/', '', $parentContact)) < 7) ||
-          (strlen(preg_replace('/\D+/', '', $parentContact)) > 15)) {
-    $errors[] = "Please enter a valid parent's/guardian's contact number, has to be 7 or more digits .";
-}
-
-
-
-
+    if ($firstName === "")      $errors[] = "Please enter your first name.";
+    if ($lastName === "")       $errors[] = "Please enter your last name.";
+    if ($dob === "")            $errors[] = "Please enter your date of birth.";
+    if ($parentName === "")     $errors[] = "Please enter your parent's/guardian's name.";
+    if ($parentContact === "")  $errors[] = "Please enter your parent's/guardian's contact.";
     // Address optional if you like; you can also require it.
 
     // Handle photo upload (optional but recommended)
@@ -392,12 +362,27 @@ include "partials/header.php";
                        value="<?= htmlspecialchars($lastName); ?>" required>
               </div>
 
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="dob" class="form-label">Date of Birth</label>
                 <input type="date" name="dob" id="dob"
                        class="form-control"
                        value="<?= htmlspecialchars($dob); ?>" required>
+              </div> -->
+                  <!--This validates the calender from year 2000 - 2010 -->
+              <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date"
+                      name="dob"
+                      id="dob"
+                      class="form-control"
+                      min="2000-01-01"
+                      max="2010-12-31"
+                      required>
+                <!-- <div class="form-text text-muted small">
+                  Please select your birth date (between 2000 and 2010).
+                </div> -->
               </div>
+
 
               <div class="mb-3">
                 <label for="parent_name" class="form-label">Parent/Guardian Name</label>
@@ -406,11 +391,30 @@ include "partials/header.php";
                        value="<?= htmlspecialchars($parentName); ?>" required>
               </div>
 
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="parent_contact" class="form-label">Parent/Guardian Contact</label>
                 <input type="text" name="parent_contact" id="parent_contact"
                        class="form-control"
                        value="<?= htmlspecialchars($parentContact); ?>" required>
+              </div> -->
+
+
+                  <!-- Parent/Guardian Contact field (7-digit validation       -->
+              <div class="mb-3">
+                    <label for="parent_contact" class="form-label">Parent/Guardian Contact</label>
+                    <input type="text"
+                                name="parent_contact"
+                                id="parent_contact"
+                                class="form-control"
+                                value="<?= htmlspecialchars($parentContact); ?>"
+                                pattern="\d{7}"   
+                                maxlength="7"     
+                                minlength="7"      
+                                title="Please enter exactly 7 digits (e.g. 9876543)"
+                                required>
+                      <div class="form-text text-muted small">
+                            Enter a 7-digit mobile number only (e.g. 9876543)
+                      </div>
               </div>
 
               <div class="mb-3">
@@ -575,7 +579,7 @@ include "partials/header.php";
                   </div>
                 </div>
 
-                <!-- Science options (example – you can customise later) -->
+                <!-- Science options -->
                 <div id="science_subjects" style="display:none;">
                   <p class="text-muted small mb-2"><strong>Science stream (example set):</strong></p>
                   <div class="mb-2">
