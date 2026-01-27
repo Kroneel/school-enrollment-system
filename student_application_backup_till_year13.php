@@ -690,3 +690,4 @@ document.addEventListener('DOMContentLoaded', function () {
   if (streamScience) streamScience.addEventListener('change', updateStreamSections);
 });
 </script>
+
