@@ -66,6 +66,9 @@ if ($step === 1 && $_SERVER["REQUEST_METHOD"] === "POST") {
     $dob           = trim($_POST["dob"] ?? "");
     $parentName    = trim($_POST["parent_name"] ?? "");
     $parentContact = trim($_POST["parent_contact"] ?? "");
+    if (!preg_match('/^[0-9]{7}$/', $parentContact)) {
+    $errors[] = "Parent/Guardian contact must contain exactly 7 digits (e.g. 9876543).";
+    }
     $address       = trim($_POST["address"] ?? "");
 
     if ($firstName === "")      $errors[] = "Please enter your first name.";
@@ -73,6 +76,7 @@ if ($step === 1 && $_SERVER["REQUEST_METHOD"] === "POST") {
     if ($dob === "")            $errors[] = "Please enter your date of birth.";
     if ($parentName === "")     $errors[] = "Please enter your parent's/guardian's name.";
     if ($parentContact === "")  $errors[] = "Please enter your parent's/guardian's contact.";
+    
 
     // Handle photo upload (optional)
     $photoFilename = null;
@@ -205,11 +209,14 @@ include "partials/header.php";
           <h3 class="card-title mb-3">Enrollment Application – Step 1 of 2</h3>
           <p class="text-muted small">Please provide your personal details and a passport-size photo.</p>
 
-          <?php if (!empty($errors)): ?>
-            <div class="alert alert-danger"><ul class="mb-0">
-              <?php foreach ($errors as $e): ?><li><?= htmlspecialchars($e); ?></li><?php endforeach; ?>
-            </ul></div>
+        <?php if (!empty($errors)): ?>
+            <div class="mt-2">
+              <?php foreach ($errors as $e): ?>
+                <div class="text-danger small mb-1">⚠ <?= htmlspecialchars($e); ?></div>
+              <?php endforeach; ?>
+            </div>
           <?php endif; ?>
+
 
           <?php
           $firstName     = $_POST["first_name"] ?? "";
@@ -250,16 +257,26 @@ include "partials/header.php";
               <input type="text" name="parent_name" id="parent_name" class="form-control"
                      value="<?= htmlspecialchars($parentName); ?>" required>
             </div>
+
             <div class="mb-3">
-              <label for="parent_contact" class="form-label">Parent/Guardian Contact</label>
-              <input type="text" name="parent_contact" id="parent_contact" class="form-control"
-                     value="<?= htmlspecialchars($parentContact); ?>"
-                     pattern="\d{7}" maxlength="7" minlength="7"
-                     title="Please enter exactly 7 digits (e.g. 9876543)" required>
-              <div class="form-text text-muted small">
-                Enter a 7-digit mobile number only (e.g. 9876543)
-              </div>
-            </div>
+  <label for="parent_contact" class="form-label">Parent/Guardian Contact</label>
+  <input
+    type="text"
+    name="parent_contact"
+    id="parent_contact"
+    class="form-control"
+    value="<?= htmlspecialchars($parentContact); ?>"
+    pattern="^[0-9]{7}$"
+    title="Please enter exactly 7 digits (e.g. 9876543)"
+    required
+    oninvalid="this.setCustomValidity('Please enter exactly 7 digits (e.g. 9876543)')"
+    oninput="this.setCustomValidity('')"
+  >
+  <div class="form-text text-muted small">
+    Enter a 7-digit mobile number only (e.g. 9876543)
+  </div>
+</div>
+
             <div class="mb-3">
               <label for="address" class="form-label">Home Address</label>
               <textarea name="address" id="address" rows="3" class="form-control"><?= htmlspecialchars($address); ?></textarea>
