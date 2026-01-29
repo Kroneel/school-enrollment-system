@@ -2,9 +2,9 @@
 /* ====================================================
    File: applications.php
    Purpose:
-   - Teacher view of submitted student applications
+   - Administrator view of submitted student applications
    - Supports search and pagination
-   - Only teachers can access this page
+   - Only Administrator can access this page
    ==================================================== */
 
 require "db.php";
@@ -181,3 +181,4 @@ $result = $stmt->get_result();
 </div>
 
 <?php include "partials/footer.php"; ?>
+
