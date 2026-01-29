@@ -2,11 +2,11 @@
 /* ====================================================
    File: login.php
    Purpose:
-   - Teacher Login with Email-based OTP (2FA)
+   - ADMIN Login with Email-based OTP (2FA)
    - Supports login using Teacher ID OR Email
    ==================================================== */
 
-$pageTitle = "Teacher Login - My School";
+$pageTitle = "Administrator Login - My School";
 
 require "db.php";
 include "partials/header.php";
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $identifier = trim($_POST["identifier"] ?? "");
     $password   = $_POST["password"] ?? "";
 
-    if ($identifier === "") $errors[] = "Please enter your Teacher ID or Email.";
+    if ($identifier === "") $errors[] = "Please enter your Administrator ID or Email.";
     if ($password === "")   $errors[] = "Please enter your password.";
 
     if (empty($errors)) {
@@ -130,9 +130,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <h3 class="card-title mb-3">Teacher Login</h3>
+                    <h3 class="card-title mb-3">Administrator Login</h3>
                     <p class="text-muted small mb-3">
-                        Login using your Teacher ID (e.g. <strong>T0001</strong>) or Email.
+                        Login using your Administrator ID (e.g. <strong>T0001</strong>) or Email.
                     </p>
 
                     <!-- Display Errors -->
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form method="post">
 
                         <div class="mb-3">
-                            <label class="form-label">Teacher ID or Email</label>
+                            <label class="form-label">Administrator ID or Email</label>
                             <input type="text" name="identifier" class="form-control" required>
                         </div>
 
