@@ -2,10 +2,10 @@
 /* ====================================================
    File: dashboard.php
    Purpose:
-   - Teacher Dashboard (Profile + Quick Info + Actions)
+   - Administrator Dashboard (Profile + Quick Info + Actions)
    ==================================================== */
 
-$pageTitle = "Teacher Dashboard - My School";
+$pageTitle = "Administrator Dashboard - My School";
 
 // Include header (starts session + navbar)
 include "partials/header.php";
@@ -16,7 +16,7 @@ if (!isset($_SESSION["teacher_logged_in"]) || $_SESSION["teacher_logged_in"] !==
     exit;
 }
 
-// Teacher info
+// Administrator info
 $teacherName  = $_SESSION["teacher_name"]  ?? "Teacher";
 $teacherId    = $_SESSION["teacher_id"]    ?? "N/A";
 $teacherEmail = $_SESSION["teacher_email"] ?? "N/A";
@@ -56,7 +56,7 @@ $todayDate = date("l, d M Y");
   <!-- Page heading -->
   <div class="row mb-3">
     <div class="col-12">
-      <h2 class="mb-1">Teacher Dashboard</h2>
+      <h2 class="mb-1">Administrator Dashboard</h2>
       <p class="text-muted mb-0">
         Welcome back, <?= htmlspecialchars($teacherName); ?>. Manage students and view school updates here.
       </p>
@@ -81,7 +81,7 @@ $todayDate = date("l, d M Y");
               <div>
                 <h5 class="fw-bold mb-1"><?= htmlspecialchars($teacherName); ?></h5>
                 <div class="text-muted small">
-                  Teacher ID: <strong><?= htmlspecialchars($teacherId); ?></strong>
+                  Administrator ID: <strong><?= htmlspecialchars($teacherId); ?></strong>
                 </div>
                 <div class="text-muted small">
                   Email: <?= htmlspecialchars($teacherEmail); ?>
